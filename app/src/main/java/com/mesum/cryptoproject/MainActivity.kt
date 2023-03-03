@@ -21,5 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         println("Change 2 ")
 
+        print("This line will be merged")
+
     }
 }
