@@ -16,5 +16,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.pullData()
 
         Log.d("Test", "Test Log")
+
+        Log.d("Test", "second test third commit")
     }
 }
