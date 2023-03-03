@@ -2,6 +2,7 @@ package com.mesum.cryptoproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.mesum.bitcoinapp.viewmodel.CoinViewModel
 
@@ -14,5 +15,6 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(CoinViewModel::class.java)
         viewModel.pullData()
 
+        Log.d("Test", "Test Log")
     }
 }
