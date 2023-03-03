@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("Test", "second test third commit")
 
-        println("Experimenetal bracnch ")
+        println("Change 2 ")
 
     }
 }
