@@ -17,6 +17,6 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("Test", "Test Log")
 
-        ejfngerjngkejrngk
+        Log.d("Test", "second test third commit")
     }
 }
