@@ -21,8 +21,11 @@ class MainActivity : AppCompatActivity() {
 
         println("Change 2 ")
 
-
+<<<<<<< HEAD
+        print("This line will be merged")
+=======
         print("Crypto console merge commit")
+>>>>>>> cryptoBranch
 
     }
 }
