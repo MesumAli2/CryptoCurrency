@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         println("Change 2 ")
 
+
         print("Crypto console merge commit")
 
-        println("Hello from your friend")
-
+        println("Hello from real friend ")
 
     }
 }
