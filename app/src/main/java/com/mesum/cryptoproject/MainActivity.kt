@@ -24,5 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         print("Crypto console merge commit")
 
+        println("Hello from real friend ")
+
     }
 }
