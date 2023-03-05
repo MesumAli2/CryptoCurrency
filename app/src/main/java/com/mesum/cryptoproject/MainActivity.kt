@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         println("Hello from real friend ")
 
-        println("I will creater a merge confewfewfweqfqwelict nakamto")
+        println("I will creater a merge confewfewfweqfqw hfjhfhjfjhf elict nakamto")
 
     }
 }
