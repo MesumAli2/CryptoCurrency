@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface CryptoCompareApi {
-
+erg
     @GET("histoday")
      fun getDailyHistoricalData(
         @Query("fsym") fromSymbol: String = "BTC",
