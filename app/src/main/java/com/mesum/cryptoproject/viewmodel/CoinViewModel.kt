@@ -32,6 +32,8 @@ class CoinViewModel : ViewModel(){
 //
 //        }
 
+        Log.d("tag", "tag")
+
         ApiClient.cryptoCompareApi.getDailyHistoricalData().enqueue(object  : retrofit2.Callback<dataModel>{
             override fun onResponse(call: Call<dataModel>, response: Response<dataModel>) {
                                     Log.d("UserData", response.body().toString())
