@@ -27,5 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         println("Hello from real friend ")
 
+        println("we are in nakamato missoi accomplusmed")
+
     }
 }
