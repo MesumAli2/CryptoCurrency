@@ -22,9 +22,12 @@ class MainActivity : AppCompatActivity() {
         println("Change 2 ")
 
 
+        println("cryptogeniussatoshi")
         print("Crypto console merge commit")
 
         println("Hello from real friend ")
+
+        println("we are in nakamato missoi accomplusmed")
 
     }
 }
