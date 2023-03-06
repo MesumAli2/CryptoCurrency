@@ -1,16 +1,16 @@
 package com.mesum.bitcoinapp.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.mesum.cryptoproject.model.dataModel
+import com.mesum.cryptoproject.model.CryptoRp
 import com.mesum.cryptoproject.network.ApiClient
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class CoinViewModel : ViewModel(){
+
+    val coinData = MutableLiveData<CryptoRp>()
 
     fun pullData(){
 //        viewModelScope.launch() {
@@ -37,13 +37,19 @@ class CoinViewModel : ViewModel(){
 
         Log.d("tag1", "tag1")
 
-        ApiClient.cryptoCompareApi.getDailyHistoricalData().enqueue(object  : retrofit2.Callback<dataModel>{
-            override fun onResponse(call: Call<dataModel>, response: Response<dataModel>) {
-                                    Log.d("UserData", response.body().toString())
+        ApiClient.cryptoCompareApi.getDailyHistoricalData().enqueue(object  : retrofit2.Callback<CryptoRp>{
 
+
+
+
+            override fun onResponse(call: Call<CryptoRp>, response: Response<CryptoRp>) {
+                Log.d("UserData", response.body().toString())
+                if (response.isSuccessful){
+                    coinData.value = response.body()
+                }
             }
 
-            override fun onFailure(call: Call<dataModel>, t: Throwable) {
+            override fun onFailure(call: Call<CryptoRp>, t: Throwable) {
                 Log.d("UserData", t.toString())
             }
 

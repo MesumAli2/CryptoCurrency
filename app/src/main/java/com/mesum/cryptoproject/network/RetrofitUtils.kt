@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
     }
 
     val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://min-api.cryptocompare.com/data/all/coinlist")
+        .baseUrl("https://min-api.cryptocompare.com/data/top/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(createClient())
         .build()
