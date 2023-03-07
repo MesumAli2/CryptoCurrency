@@ -1,11 +1,7 @@
 package com.mesum.cryptoproject.ui.detail
 
-import android.graphics.BitmapShader
 import android.graphics.Color
-import android.graphics.Shader
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -42,6 +38,11 @@ class DetailActivity : AppCompatActivity() {
         val cryptoName = intent.getStringExtra("cryptoName")
         val cryptoPrice = intent.getStringExtra("cryptoPrice")
         val cryptoFullName = intent.getStringExtra("cryptoNameFull")
+        window.statusBarColor = resources.getColor(R.color.gray)
+        val actionBar = supportActionBar
+        val colorDrawable = ColorDrawable(Color.parseColor("#1F2630"))
+        actionBar?.setBackgroundDrawable(colorDrawable)
+
         getSupportActionBar()?.setTitle("Overview");
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 
@@ -126,6 +127,7 @@ class DetailActivity : AppCompatActivity() {
             val xaxis: XAxis = graphView!!.xAxis
             xaxis.granularity = 1f
             xaxis.axisLineColor = resources.getColor(android.R.color.transparent)
+            xaxis.textColor = resources.getColor(R.color.white)
             xaxis.valueFormatter =
             IAxisValueFormatter { value, _ ->
 

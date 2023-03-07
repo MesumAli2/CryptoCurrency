@@ -1,6 +1,8 @@
 package com.mesum.cryptoproject.ui.main
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -33,8 +35,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.statusBarColor = resources.getColor(R.color.gray)
 
-        window.statusBarColor = resources.getColor(R.color.black);
+        val actionBar = supportActionBar
+        val colorDrawable = ColorDrawable(Color.parseColor("#1F2630"))
+        actionBar?.setBackgroundDrawable(colorDrawable)
 
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
@@ -44,8 +49,9 @@ class MainActivity : AppCompatActivity() {
 
 
         viewModel.coinData.observe(this){
+            val list = it.data.filterNot {  it.coinInfo.name.contains("COVER")}
             Log.d("activity", "${it.data}")
-            adapter.submitList(it.data)
+            adapter.submitList(list)
             rv.adapter = adapter
         }
 
