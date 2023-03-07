@@ -1,7 +1,6 @@
-package com.mesum.cryptoproject.ui.adapter
+package com.mesum.cryptoproject.ui.main.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mesum.cryptoproject.R
-import com.mesum.cryptoproject.model.Data
+import com.mesum.cryptoproject.model.allcoinresponse.Data
+import com.mesum.cryptoproject.ui.`interface`.OnCryptoClicked
 
 
-class CoinListAdapter(val ctx : Context) : ListAdapter<Data, CoinListAdapter.RvViewHolder>(diffUtil) {
+class CoinListAdapter(val ctx: Context,val  param: OnCryptoClicked) : ListAdapter<Data, CoinListAdapter.RvViewHolder>(diffUtil) {
     inner class RvViewHolder (view : View): RecyclerView.ViewHolder(view ){
 
     }
@@ -39,6 +39,10 @@ class CoinListAdapter(val ctx : Context) : ListAdapter<Data, CoinListAdapter.RvV
         holder.itemView.findViewById<TextView>(R.id.coin_name).text = coin.coinInfo.name
         holder.itemView.findViewById<TextView>(R.id.coin_price).text = coin?.dISPLAY?.USD?.pRICE.toString()
         holder.itemView.findViewById<TextView>(R.id.coin_full_nam).text = coin.coinInfo.fullName.toString()
+        holder.itemView.setOnClickListener {
+            param.onItemClick(coin.coinInfo.name)
+
+        }
 
     }
 }

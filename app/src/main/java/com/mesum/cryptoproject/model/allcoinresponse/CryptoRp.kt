@@ -1,4 +1,4 @@
-package com.mesum.cryptoproject.model
+package com.mesum.cryptoproject.model.allcoinresponse
 
 
 import com.google.gson.annotations.SerializedName
