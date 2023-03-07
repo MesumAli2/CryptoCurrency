@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -39,9 +40,19 @@ class DetailActivity : AppCompatActivity() {
         graphView =  findViewById(R.id.chart)
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         val cryptoName = intent.getStringExtra("cryptoName")
-        Toast.makeText(this, "${intent.getStringExtra("cryptoName")}", Toast.LENGTH_SHORT).show()
-      //  createGraphData(price = price?.toList())
+        val cryptoPrice = intent.getStringExtra("cryptoPrice")
+        val cryptoFullName = intent.getStringExtra("cryptoNameFull")
+        getSupportActionBar()?.setTitle("Overview");
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 
+        //  createGraphData(price = price?.toList())
+
+        val cryptoText = findViewById<TextView>(R.id.crypto_name)
+        cryptoText.text = cryptoName.toString()
+        val cryptoFullText = findViewById<TextView>(R.id.crypto_name_full)
+        cryptoFullText.text = cryptoFullName.toString()
+        val cryptoPriceText = findViewById<TextView>(R.id.crypto_price)
+        cryptoPriceText.text = cryptoPrice.toString()
         if (cryptoName != null) {
             viewModel.getCoin(cryptoName)
             viewModel.coinList.observe(this){
@@ -72,6 +83,11 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        this.onBackPressed()
+        return true;
+    }
+
     private fun createGraphData(price: List<Float>?, unixTime: ArrayList<Long>){
 
         Log.d("Sizes", "sixe of price ${price?.size.toString()} size of time ${unixTime.size.toString()}")
@@ -92,9 +108,10 @@ class DetailActivity : AppCompatActivity() {
 
 
 
-            val set1: LineDataSet = LineDataSet(values, "Chart")
+            val set1: LineDataSet = LineDataSet(values, "")
             set1.color = resources.getColor(android.R.color.transparent)
             set1.setCircleColor(Color.GRAY)
+            set1.valueTextColor = resources.getColor(R.color.white)
             set1.valueTextSize = 30f
             set1.setDrawFilled(true)
             val fillGradient = ContextCompat.getDrawable(this, R.drawable.reg_gradient)
@@ -108,6 +125,7 @@ class DetailActivity : AppCompatActivity() {
 
             val xaxis: XAxis = graphView!!.xAxis
             xaxis.granularity = 1f
+            xaxis.axisLineColor = resources.getColor(android.R.color.transparent)
             xaxis.valueFormatter =
             IAxisValueFormatter { value, _ ->
 

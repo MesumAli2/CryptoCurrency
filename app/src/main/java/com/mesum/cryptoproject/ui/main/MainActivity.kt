@@ -18,10 +18,14 @@ import com.mesum.cryptoproject.ui.main.adapter.CoinListAdapter
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel : CoinViewModel
     val adapter : CoinListAdapter = CoinListAdapter(this, object : OnCryptoClicked{
+
         @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-        override fun onItemClick(cryptoName: String) {
+        override fun onItemClick(cryptoName: String, cryptoFulName : String, cryptoPrice : String) {
             val intent = Intent(this@MainActivity, DetailActivity::class.java)
             intent.putExtra("cryptoName", cryptoName)
+            intent.putExtra("cryptoNameFull", cryptoFulName)
+            intent.putExtra("cryptoPrice", cryptoPrice)
+
             startActivity(intent)
         }
     })

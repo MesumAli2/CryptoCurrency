@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#1F2630"
+
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
 
@@ -12,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:padding="12sp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,14 +23,19 @@
             android:id="@+id/crypto_name"
             android:layout_width="26dp"
             android:layout_height="16dp"
+            android:textColor="#868F9E"
+
             android:text="BTC"
             android:textSize="14dp" />
 
 
         <TextView
             android:id="@+id/crypto_name_full"
-            android:layout_width="26dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#EBECEE"
+
+            android:layout_height="wrap_content"
             android:text="Bitcoin"
             android:textSize="18dp" />
 
@@ -35,6 +43,8 @@
             android:id="@+id/crypto_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#EBECEE"
+
             android:layout_marginTop="8dp"
             android:text="$2424.24"
             android:textSize="18dp" />
@@ -45,6 +55,7 @@
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="0sp"
+        android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
