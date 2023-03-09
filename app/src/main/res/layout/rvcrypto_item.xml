@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bitcoin"
+            android:textColor="#EBECEE"
             android:layout_marginStart="8dp"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/coin_name"
@@ -45,6 +46,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:text="BTC"
+            android:textColor="#868F9E"
             android:textSize="12sp"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +65,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:text="$4399"
+        android:textColor="#EBECEE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
