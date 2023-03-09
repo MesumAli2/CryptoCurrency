@@ -1,5 +1,6 @@
 package com.mesum.cryptoproject.network
 
+import android.util.Log
 import com.mesum.cryptoproject.`interface`.CryptoCompareApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,6 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory
             chain.proceed(request)
         }
         return httpClient.build()
+
+        Log.d("rd", "rd")
     }
 
     val retrofit: Retrofit = Retrofit.Builder()
