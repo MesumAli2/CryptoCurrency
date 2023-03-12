@@ -17,6 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory
         }
         return httpClient.build()
 
+        Log.d("nk,","ds")
+
         Log.d("rd", "rd")
     }
 
