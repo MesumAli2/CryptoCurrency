@@ -105,10 +105,7 @@ class DetailActivity : AppCompatActivity() {
 
             }
 
-
-
-
-
+            Log.d("Tag", "g")
             val set1: LineDataSet = LineDataSet(values, "")
             set1.color = resources.getColor(android.R.color.transparent)
             set1.setCircleColor(Color.GRAY)
