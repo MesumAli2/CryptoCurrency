@@ -78,7 +78,7 @@ class DetailActivity : AppCompatActivity() {
         val unixTime: Long = unixTime // Replace with your own Unix timestamp
 
         val date = Date(unixTime * 1000L) // Convert seconds to milliseconds
-
+Log.d("ghv", "b")
         val sdf = SimpleDateFormat("EEE")
         return   sdf.format(date)
 
