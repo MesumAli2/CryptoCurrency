@@ -1,5 +1,5 @@
 # CryptoCurrency
-Thank you for using our simple crypto currency price tracking app! We value your privacy and want to be transparent about how we handle your information. This Privacy Policy outlines the types of information we collect, how we use that information, and your options regarding your information.
+Thank you for using our Crypto Tracker price tracking app! We value your privacy and want to be transparent about how we handle your information. This Privacy Policy outlines the types of information we collect, how we use that information, and your options regarding your information.
 
 Information We Collect
 
