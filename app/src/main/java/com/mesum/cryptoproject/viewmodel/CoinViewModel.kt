@@ -32,7 +32,6 @@ class CoinViewModel : ViewModel(){
     }
 
 
-    "tjhis is fgnlfkdnl"
     fun getCoin(coin : String){
         ApiClient.cryptoCompareApi.getIndividualCrypto("https://min-api.cryptocompare.com/data/histoday?fsym=$coin&tsym=USD&limit=5").enqueue(object : Callback<SingleCoin>{
             override fun onResponse(call: Call<SingleCoin>, response: Response<SingleCoin>) {
