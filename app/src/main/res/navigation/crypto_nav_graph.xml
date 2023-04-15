@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.mesum.cryptoproject.ui.MainFragment"
-        android:label="fragment_main"
+        android:label="Crypto Tracker"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_cryptoDetailFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/cryptoDetailFragment"
         android:name="com.mesum.cryptoproject.ui.CryptoDetailFragment"
-        android:label="CryptoDetailFragment" >
+        android:label="Crypto Detail" >
 
         <argument
             android:name="cryptoName"
