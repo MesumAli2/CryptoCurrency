@@ -14,6 +14,7 @@ class CoinViewModel : ViewModel(){
 
     val coinData = MutableLiveData<CryptoRp>()
     val coinList = MutableLiveData<SingleCoin>()
+    val dataNoShow = MutableLiveData<Boolean>(false)
 
     fun pullData(){
         ApiClient.cryptoCompareApi.getDailyHistoricalData().enqueue(object  : retrofit2.Callback<CryptoRp>{
@@ -32,8 +33,8 @@ class CoinViewModel : ViewModel(){
     }
 
 
-    fun getCoin(coin : String){
-        ApiClient.cryptoCompareApi.getIndividualCrypto("https://min-api.cryptocompare.com/data/histoday?fsym=$coin&tsym=USD&limit=5").enqueue(object : Callback<SingleCoin>{
+    fun getCoin(coin : String, limit : Int= 5){
+        ApiClient.cryptoCompareApi.getIndividualCrypto("https://min-api.cryptocompare.com/data/histoday?fsym=$coin&tsym=USD&limit=$limit").enqueue(object : Callback<SingleCoin>{
             override fun onResponse(call: Call<SingleCoin>, response: Response<SingleCoin>) {
                 if (response.isSuccessful){
                     Log.d("singleCoinRp", response.body().toString())

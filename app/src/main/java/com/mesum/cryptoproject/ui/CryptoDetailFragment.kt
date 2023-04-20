@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -36,6 +38,7 @@ class CryptoDetailFragment : Fragment() {
 
     private var graphView: LineChart? = null
     lateinit var viewModel : CoinViewModel
+    private var dateNoShow = false
 
 
 
@@ -63,7 +66,6 @@ class CryptoDetailFragment : Fragment() {
         graphView =  binding.chart
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
 
-
         val cryptoText = binding.cryptoName
         cryptoText.text = cryptoName.toString()
         val cryptoFullText = binding.cryptoNameFull
@@ -73,9 +75,53 @@ class CryptoDetailFragment : Fragment() {
         if (cryptoName != null) {
             viewModel.getCoin(cryptoName!!)
 
+
+
+            binding.checkBox5Days.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    // Checkbox 5 days is selected
+                    // Perform some action
+                  //  Toast.makeText(activity, "5 selected", Toast.LENGTH_SHORT).show()
+
+                    Log.d("checkBoxRight", "5 selected")
+                    viewModel.getCoin(cryptoName!!, 5 )
+                    graphView?.clear()
+                    dateNoShow = false
+                    viewModel.dataNoShow.value = false
+                }
+            }
+
+            binding.checkBox10Days.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    // Checkbox 10 days is selected
+                    // Perform some action
+                  //  Toast.makeText(activity, "10 selected", Toast.LENGTH_SHORT).show()
+                    viewModel.getCoin(cryptoName!!, 10 )
+                    graphView?.clear()
+                    dateNoShow = true
+                    viewModel.dataNoShow.value = true
+
+
+                }
+            }
+
+            binding.checkBox14Days.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    // Checkbox 14 days is selected
+                    // Perform some action
+                   // Toast.makeText(activity, "14 selected", Toast.LENGTH_SHORT).show()
+                    viewModel.getCoin(cryptoName!!, 14 )
+                    graphView?.clear()
+                    viewModel.dataNoShow.value = true
+                }
+            }
+
+        }
+
             viewModel.coinList.observe(viewLifecycleOwner){
                 val price = arrayListOf<Float>()
                 val unixTime = arrayListOf<Long>()
+                unixTime.clear()
                 val data = it.data
                 for (i in data){
                     price.add(i.open.toFloat())
@@ -87,7 +133,9 @@ class CryptoDetailFragment : Fragment() {
             }
         }
 
-    }
+
+
+
 
 
 
@@ -119,8 +167,10 @@ class CryptoDetailFragment : Fragment() {
             val set1: LineDataSet = LineDataSet(values, "")
             set1.color = resources.getColor(android.R.color.transparent)
             set1.setCircleColor(Color.GRAY)
-            set1.valueTextColor = resources.getColor(R.color.white)
-            set1.valueTextSize = 30f
+            set1.setDrawValues(false)
+            set1.setDrawCircles(false)
+           // set1.valueTextColor = resources.getColor(R.color.white)
+            set1.valueTextSize = 8f
             set1.setDrawFilled(true)
             val fillGradient = ContextCompat.getDrawable(requireContext(), R.drawable.reg_gradient)
             set1.fillDrawable = fillGradient
@@ -135,23 +185,31 @@ class CryptoDetailFragment : Fragment() {
             xaxis.granularity = 1f
             xaxis.axisLineColor = resources.getColor(android.R.color.transparent)
             xaxis.textColor = resources.getColor(R.color.white)
-            xaxis.valueFormatter =
-                IAxisValueFormatter { value, _ ->
+//            viewModel.dataNoShow.observe(viewLifecycleOwner){
+//                Toast.makeText(activity, it.toString(), Toast.LENGTH_SHORT).show()
+//                if (!it){
+//                    xaxis.valueFormatter = IAxisValueFormatter { value, _ ->
+//                        getTime(unixTime[(value.toInt())])
+//                    }
+//                }
+//
+//            }
 
-                    getTime(unixTime[value.toInt()])
-                }
+             graphView!!.getXAxis().setDrawLabels(false);
+            xaxis.setValueFormatter(null);
+            xaxis.setLabelCount(0)
+            xaxis.gridColor = Color.TRANSPARENT
+            xaxis.gridLineWidth = 0f
+
             xaxis.position = XAxis.XAxisPosition.BOTTOM;
-
-
-
-
             val yAxisRight = graphView!!.getAxisRight();
             yAxisRight.setEnabled(false);
-
             val leftAxis: YAxis = graphView!!.getAxisLeft()
-            leftAxis.isEnabled = false
+            leftAxis.gridColor = Color.WHITE
+            leftAxis.textColor = Color.WHITE
+            leftAxis.isEnabled = true
 
-            leftAxis.setDrawAxisLine(false);
+          leftAxis.setDrawAxisLine(false);
 
         }
 
