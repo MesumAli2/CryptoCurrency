@@ -30,5 +30,20 @@
         <argument
             android:name="cryptoPrice"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_cryptoDetailFragment_to_cryptoOverviewFragment"
+            app:destination="@id/cryptoOverviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cryptoOverviewFragment"
+        android:name="com.mesum.cryptoproject.ui.CryptoOverviewFragment"
+        android:label="fragment_crypto_overview"
+        tools:layout="@layout/fragment_crypto_overview">
+
+        <deepLink
+            android:id="@+id/deepLinkCryptoOverview"
+            app:uri="cryptoCompare://cryptoOverview?coin_url={coinUrl}" />
+
+
     </fragment>
 </navigation>

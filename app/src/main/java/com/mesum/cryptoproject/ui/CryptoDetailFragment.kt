@@ -1,7 +1,9 @@
 package com.mesum.cryptoproject.ui
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,7 +13,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDeepLinkBuilder
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavGraph
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -35,6 +44,7 @@ class CryptoDetailFragment : Fragment() {
     private var cryptoName: String? = null
     private var cryptoPrice: String? = null
     private var cryptoFullName: String? = null
+    private var cryptoUrl : String? = null
 
     private var graphView: LineChart? = null
     lateinit var viewModel : CoinViewModel
@@ -50,6 +60,7 @@ class CryptoDetailFragment : Fragment() {
             cryptoName = it.getString("cryptoName")
             cryptoPrice = it.getString("cryptoPrice")
             cryptoFullName = it.getString("cryptoNameFull")
+            cryptoUrl = it.getString("overview")
         }
     }
     override fun onCreateView(
@@ -130,7 +141,16 @@ class CryptoDetailFragment : Fragment() {
                 createGraphData(price,unixTime )
                 graphView!!.xAxis.setDrawGridLines(false);
 
+                binding.coinLl.setOnClickListener {
+                    val url = "https://www.cryptocompare.com$cryptoUrl" // Replace with the actual moment ID value
+                    val deepLink ="cryptoCompare://cryptoOverview?coin_url=$url"
+                    findNavController().navigate(Uri.parse(deepLink))
+
+                }
+
             }
+
+
         }
 
 

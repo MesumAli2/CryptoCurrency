@@ -1,24 +1,18 @@
 package com.mesum.cryptoproject.ui
 
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.mesum.bitcoinapp.viewmodel.CoinViewModel
 import com.mesum.cryptoproject.R
 import com.mesum.cryptoproject.databinding.FragmentMainBinding
-import com.mesum.cryptoproject.ui.detail.DetailActivity
 import com.mesum.cryptoproject.ui.`interface`.OnCryptoClicked
 import com.mesum.cryptoproject.ui.main.adapter.CoinListAdapter
 
@@ -60,11 +54,17 @@ class MainFragment : Fragment(), OnCryptoClicked {
 
     }
 
-    override fun onItemClick(cryptoName: String, cryptoFulName: String, cryptoPrice: String) {
+    override fun onItemClick(
+        cryptoName: String,
+        cryptoFulName: String,
+        cryptoPrice: String,
+        overviewUrl: String
+    ) {
 
         val bundle = bundleOf("cryptoName" to cryptoName,
                    "cryptoNameFull" to cryptoFulName,
-                    "cryptoPrice" to cryptoPrice
+                    "cryptoPrice" to cryptoPrice,
+                    "overview" to overviewUrl
             )
 
         findNavController().navigate(R.id.action_mainFragment_to_cryptoDetailFragment, bundle)

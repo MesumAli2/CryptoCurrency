@@ -23,6 +23,9 @@ import com.mesum.cryptoproject.ui.main.adapter.CoinListAdapter
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var deepLinkIntent: Intent? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,11 +38,27 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-
-
+        intent?.let {
+            if (Intent.ACTION_VIEW == it.action) {
+                deepLinkIntent = it
+            }
+        }
 
     }
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
 
+        // Check if the activity was started with a deep link
+        intent?.let {
+            if (Intent.ACTION_VIEW == it.action) {
+                deepLinkIntent = it
+            }
+        }
+    }
+
+    fun getDeepLinkIntent(): Intent? {
+        return deepLinkIntent
+    }
     override fun onSupportNavigateUp(): Boolean {
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()

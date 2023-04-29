@@ -2,6 +2,7 @@ package com.mesum.cryptoproject.ui.main.adapter
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,22 +29,24 @@ class CoinListAdapter(val ctx: Context,val  param: OnCryptoClicked) : ListAdapte
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onBindViewHolder(holder: RvViewHolder, position: Int) {
+
+
        val coinImageView = holder.itemView.findViewById<ImageView>(R.id.coin_logo)
 
-
         val coin = getItem(position)
+        Log.d("CoinBinded", getItem(position).toString())
         val imageUrl = "https://www.cryptocompare.com${coin.coinInfo.imageUrl}"
+
+        Log.d("imgUrl", imageUrl)
         Glide.with(ctx)
             .load(imageUrl)
             .into(coinImageView)
-
-
 
         holder.itemView.findViewById<TextView>(R.id.coin_name).text = coin.coinInfo.name
         holder.itemView.findViewById<TextView>(R.id.coin_price).text = coin?.dISPLAY?.USD?.pRICE.toString()
         holder.itemView.findViewById<TextView>(R.id.coin_full_nam).text = coin.coinInfo.fullName.toString()
         holder.itemView.setOnClickListener {
-            param.onItemClick(coin.coinInfo.name, coin.coinInfo.fullName, coin.dISPLAY?.USD?.pRICE.toString())
+            param.onItemClick(coin.coinInfo.name, coin.coinInfo.fullName, coin.dISPLAY?.USD?.pRICE.toString(), coin.coinInfo.url.toString())
 
         }
 
