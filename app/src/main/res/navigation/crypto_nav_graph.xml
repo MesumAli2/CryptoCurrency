@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/crypto_nav_graph.xml"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.mesum.cryptoproject.ui.MainFragment"
+        android:label="Crypto Tracker"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_cryptoDetailFragment"
+            app:destination="@id/cryptoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cryptoDetailFragment"
+        android:name="com.mesum.cryptoproject.ui.CryptoDetailFragment"
+        android:label="Crypto Detail" >
+
+        <argument
+            android:name="cryptoName"
+            app:argType="string"/>
+
+        <argument
+            android:name="cryptoNameFull"
+            app:argType="string"/>
+
+        <argument
+            android:name="cryptoPrice"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_cryptoDetailFragment_to_cryptoOverviewFragment"
+            app:destination="@id/cryptoOverviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cryptoOverviewFragment"
+        android:name="com.mesum.cryptoproject.ui.CryptoOverviewFragment"
+        android:label="fragment_crypto_overview"
+        tools:layout="@layout/fragment_crypto_overview">
+
+        <deepLink
+            android:id="@+id/deepLinkCryptoOverview"
+            app:uri="cryptoCompare://cryptoOverview?coin_url={coinUrl}" />
+
+
+    </fragment>
+</navigation>

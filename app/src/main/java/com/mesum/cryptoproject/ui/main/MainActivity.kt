@@ -9,6 +9,11 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.mesum.bitcoinapp.viewmodel.CoinViewModel
 import com.mesum.cryptoproject.R
@@ -18,57 +23,44 @@ import com.mesum.cryptoproject.ui.main.adapter.CoinListAdapter
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var viewModel : CoinViewModel
-    val adapter : CoinListAdapter = CoinListAdapter(this, object : OnCryptoClicked{
 
-        @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-        override fun onItemClick(cryptoName: String, cryptoFulName : String, cryptoPrice : String) {
-            val intent = Intent(this@MainActivity, DetailActivity::class.java)
-            intent.putExtra("cryptoName", cryptoName)
-            intent.putExtra("cryptoNameFull", cryptoFulName)
-            intent.putExtra("cryptoPrice", cryptoPrice)
-
-            startActivity(intent)
-        }
-    })
+    private var deepLinkIntent: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         window.statusBarColor = resources.getColor(R.color.gray)
-
         val actionBar = supportActionBar
         val colorDrawable = ColorDrawable(Color.parseColor("#1F2630"))
         actionBar?.setBackgroundDrawable(colorDrawable)
 
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        NavigationUI.setupActionBarWithNavController(this, navController)
 
-        viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        viewModel.pullData()
-
-        val rv : RecyclerView =  findViewById<RecyclerView>(R.id.coin_recycler)
-
-
-        viewModel.coinData.observe(this){
-            val list = it.data.filterNot {  it.coinInfo.name.contains("COVER")}
-            Log.d("activity", "${it.data}")
-            adapter.submitList(list)
-            rv.adapter = adapter
+        intent?.let {
+            if (Intent.ACTION_VIEW == it.action) {
+                deepLinkIntent = it
+            }
         }
 
-        Log.d("Test", "Test Log")
+    }
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
 
-        Log.d("Test", "second test third commit")
+        // Check if the activity was started with a deep link
+        intent?.let {
+            if (Intent.ACTION_VIEW == it.action) {
+                deepLinkIntent = it
+            }
+        }
+    }
 
-        println("Change 2 ")
-
-
-        println("cryptogeniussatoshi")
-        print("Crypto console merge commit")
-
-        println("Hello from real friend ")
-
-        println("I will creater a merge confewfewfweqfqw hfjhfhjfjhf elict nakamto")
-  
-
+    fun getDeepLinkIntent(): Intent? {
+        return deepLinkIntent
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
